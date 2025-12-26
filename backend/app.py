@@ -38,7 +38,19 @@ def get_info():
     if not url:
         return jsonify({'error': 'No URL provided'}), 400
 
-    ydl_opts = {'quiet': True, 'noplaylist': True}
+    # Best attempt to avoid bot detection
+    ydl_opts = {
+        'quiet': True,
+        'noplaylist': True,
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+    }
+    
+    # Check for cookies file to bypass restrictions
+    if os.path.exists('cookies.txt'):
+        ydl_opts['cookiefile'] = 'cookies.txt'
+
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
@@ -49,7 +61,10 @@ def get_info():
                 'is_playlist': 'entries' in info
             })
     except Exception as e:
-        return jsonify({'error': str(e)}), 400
+        error_msg = str(e)
+        if "Sign in to confirm" in error_msg:
+             return jsonify({'error': 'Server IP blocked by YouTube. Cookies required.'}), 403
+        return jsonify({'error': error_msg}), 400
 
 
 @app.route('/download', methods=['POST'])
@@ -75,8 +90,14 @@ def download():
         'outtmpl': f'{DOWNLOAD_FOLDER}/%(title)s.%(ext)s',
         'noplaylist': True,  # Simple version handles single video
         'merge_output_format': 'mp4',
-        'quiet': True
+        'quiet': True,
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
     }
+    
+    if os.path.exists('cookies.txt'):
+        ydl_opts['cookiefile'] = 'cookies.txt'
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:

@@ -9,7 +9,7 @@ RUN npm pkg delete homepage
 RUN npm run build
 
 # Build Step 2: Setup the Python Backend
-FROM python:3.9-slim
+FROM python:3.11-slim
 WORKDIR /app
 
 # Install system dependencies (FFmpeg)
@@ -19,7 +19,10 @@ RUN apt-get update && \
 
 # Copy Backend Dependencies
 COPY backend/requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+# Explicitly upgrade yt-dlp to the absolute latest version
+RUN pip install --no-cache-dir --upgrade yt-dlp
 
 # Copy Backend Code
 COPY backend/ .

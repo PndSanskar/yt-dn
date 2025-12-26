@@ -8,7 +8,7 @@ import './App.css';
  */
 
 // TODO: User must replace this with their actual Render URL after deployment
-const API_URL = process.env.REACT_APP_API_URL || "https://YOUR-RENDER-APP-NAME.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL || "https://yt-dn-0nyn.onrender.com/";
 
 function App() {
   const [url, setUrl] = useState('');

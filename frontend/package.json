@@ -2,7 +2,7 @@
   "name": "youtube-downloader-frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://<your-github-username>.github.io/<repo-name>",
+  "homepage": "https://pndsanskar.github.io/yt-dn/",
   "dependencies": {
     "axios": "^1.6.0",
     "react": "^18.2.0",

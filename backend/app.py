@@ -12,6 +12,14 @@ DOWNLOAD_FOLDER = '/tmp/downloads'
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
+# Helper to setup cookies from Env Var
+def setup_cookies():
+    cookie_content = os.environ.get('COOKIES_TXT_CONTENT')
+    if cookie_content:
+        with open('cookies.txt', 'w') as f:
+            f.write(cookie_content)
+
+setup_cookies()
 
 @app.route('/')
 def serve():
@@ -43,7 +51,7 @@ def get_info():
         'quiet': True,
         'noplaylist': True,
         'http_headers': {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
     }
     
@@ -92,7 +100,7 @@ def download():
         'merge_output_format': 'mp4',
         'quiet': True,
         'http_headers': {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         }
     }
     

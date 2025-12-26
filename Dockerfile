@@ -12,9 +12,10 @@ RUN npm run build
 FROM python:3.11-slim
 WORKDIR /app
 
-# Install system dependencies (FFmpeg)
+# Install system dependencies (FFmpeg AND NodeJS for PhantomJS/JS Interp)
+# We need nodejs in the backend container because yt-dlp needs a JS runtime to decrypt some signatures
 RUN apt-get update && \
-    apt-get install -y ffmpeg && \
+    apt-get install -y ffmpeg nodejs && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy Backend Dependencies

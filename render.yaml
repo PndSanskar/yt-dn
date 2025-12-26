@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: youtube-downloader-api
+    env: docker
+    plan: free
+    # Point Render to the backend directory for the Docker build
+    dockerContext: backend
+    dockerfilePath: backend/Dockerfile
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 10000

@@ -53,10 +53,15 @@ A full-stack application to download high-quality YouTube videos (up to 4K) and 
 
 ### Backend (Render)
 
-1. Push the `backend` folder (or this entire repo, pointing to the backend folder) to GitHub.
-2. Create a new Web Service on Render.
-3. Select **Docker** as the runtime.
-4. Deploy and copy the provided URL.
+This project includes a `render.yaml` file (Render Blueprint) for easy deployment:
+
+1. Push this entire repository to GitHub.
+2. Go to your **Render Dashboard**.
+3. Click **Blueprints** > **New Blueprint Instance**.
+4. Connect this repository.
+5. Render will automatically detect the configuration and deploy the Python API via Docker.
+
+Alternatively, you can manually create a Web Service, set the runtime to **Docker**, and point the **Docker Context** to the `backend` folder.
 
 ### Frontend (GitHub Pages)
 

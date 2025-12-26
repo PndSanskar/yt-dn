@@ -12,6 +12,11 @@ if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy'}), 200
+
+
 @app.route('/info', methods=['POST'])
 def get_info():
     """

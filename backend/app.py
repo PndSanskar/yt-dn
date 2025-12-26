@@ -17,6 +17,11 @@ def health_check():
     return jsonify({'status': 'healthy'}), 200
 
 
+@app.route('/')
+def home():
+    return "Backend is running! API is ready."
+
+
 @app.route('/info', methods=['POST'])
 def get_info():
     """

@@ -53,7 +53,7 @@ function App() {
 
   return (
     <div className="card">
-      <h1 style={{ color: '#333', marginTop: 0 }}>Video Downloader</h1>
+      <h1 style={{ color: '#333', marginTop: 0 }}>Convenience tools test by Pnd_Sanskar</h1>
       <p style={{ color: '#666', fontSize: '0.9rem' }}>Enter a YouTube URL below</p>
 
       <input

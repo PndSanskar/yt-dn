@@ -7,8 +7,8 @@ import './App.css';
  * Handles URL input, fetching video info, and triggering downloads.
  */
 
-// TODO: User must replace this with their actual Render URL after deployment
-const API_URL = process.env.REACT_APP_API_URL || "https://yt-dn-0nyn.onrender.com/";
+// API_URL is empty because frontend and backend are now on the same origin
+const API_URL = "";
 
 function App() {
   const [url, setUrl] = useState('');

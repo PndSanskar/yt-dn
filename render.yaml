@@ -1,11 +1,11 @@
 services:
   - type: web
-    name: youtube-downloader-api
+    name: youtube-downloader-fullstack
     env: docker
     plan: free
-    # Point Render to the backend directory for the Docker build
-    dockerContext: backend
-    dockerfilePath: backend/Dockerfile
+    # Context is now root because Dockerfile needs access to both backend and frontend folders
+    dockerContext: .
+    dockerfilePath: Dockerfile
     healthCheckPath: /health
     autoDeploy: true
     envVars:

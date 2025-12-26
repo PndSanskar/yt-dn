@@ -1,15 +1,21 @@
 import os
 import glob
-from flask import Flask, request, send_file, jsonify, after_this_request
+from flask import Flask, request, send_file, jsonify, after_this_request, send_from_directory
 from flask_cors import CORS
 import yt_dlp
 
-app = Flask(__name__)
+# Serve the React app build folder
+app = Flask(__name__, static_folder='client_build', static_url_path='')
 CORS(app)
 
 DOWNLOAD_FOLDER = '/tmp/downloads'
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
+
+
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 @app.route('/health', methods=['GET'])
